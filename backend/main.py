@@ -23,8 +23,8 @@ app.add_middleware(
 )
 
 # Initialize model
-model = SentenceTransformer('all-MiniLM-L6-v2')  # Embedding model that turns text into embeddings
-
+#model = SentenceTransformer('all-MiniLM-L6-v2')  # Embedding model that turns text into embeddings
+model = SentenceTransformer('paraphrase-albert-small-v2')  
 current_dir = os.path.dirname(os.path.abspath(__file__))
 csv_path = os.path.join(current_dir, "cleaned_jamaica_tourism_data.csv")
 ja_df = pd.read_csv(csv_path)  
