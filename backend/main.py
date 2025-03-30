@@ -24,7 +24,10 @@ app.add_middleware(
 
 # Initialize model
 model = SentenceTransformer('all-MiniLM-L6-v2')  # Embedding model that turns text into embeddings
-ja_df = pd.read_csv("cleaned_jamaica_tourism_data.csv")  
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(current_dir, "cleaned_jamaica_tourism_data.csv")
+ja_df = pd.read_csv(csv_path)  
 
 # Generate embeddings
 ja_df['combined_text'] = ja_df['title'] + " " + ja_df['selftext'].fillna('')
