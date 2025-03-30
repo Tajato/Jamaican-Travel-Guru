@@ -1,0 +1,15 @@
+<div class="search-container">
+    <input [(ngModel)]="query" placeholder="Ask about Jamaica tourism...">
+    <button (click)="search()">Get Recommendations</button>
+  </div>
+  
+  <div *ngIf="results" class="results">
+    <h3>AI Response:</h3>
+    <p>{{ results.llm_response }}</p>
+  
+    <h4>Related Posts:</h4>
+    <div *ngFor="let match of results.matches" class="match">
+      <h5>{{ match.title }}</h5>
+      <p>{{ match.selftext }}</p>
+    </div>
+  </div>
