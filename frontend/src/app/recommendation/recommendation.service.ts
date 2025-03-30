@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecService {
-  private apiUrl = 'http://localhost:8000'; // my FastAPI URL
+  private apiUrl = environment.apiUrl; // backend url link
 
   constructor(private http: HttpClient) { }
 
