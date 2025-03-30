@@ -1,15 +1,49 @@
-<div class="search-container">
-    <input [(ngModel)]="query" placeholder="Ask about Jamaica tourism...">
-    <button (click)="search()">Get Recommendations</button>
+<div class="tropical-container">
+  <!-- Keep ALL existing header and search code -->
+  <div class="tropical-header">
+    <h1>🌴 Jamaica Travel Guru 🌊</h1>
+    <p>Discover hidden gems in paradise</p>
   </div>
-  
-  <div *ngIf="results" class="results">
-    <h3>AI Response:</h3>
-    <p>{{ results.llm_response }}</p>
-  
-    <h4>Related Posts:</h4>
-    <div *ngFor="let match of results.matches" class="match">
-      <h5>{{ match.title }}</h5>
-      <p>{{ match.selftext }}</p>
+
+  <div class="tropical-search">
+    <input 
+      [(ngModel)]="query" 
+      placeholder="Ask about beaches, resorts, or adventures..."
+      (keyup.enter)="search()"
+    >
+    <button (click)="search()">
+      <span>Get Recommendation</span>
+      <span>🍹</span>
+    </button>
+  </div>
+
+  <!-- ===== RESPONSE SECTION ===== -->
+  <div *ngIf="results" class="tropical-results">
+    <div class="palm-tree left">🌴</div>
+    <div class="result-card">
+      <h3>Your Tropical Tip:</h3>
+      
+      <!-- formatted response with copy button -->
+      <div class="llm-response" #responseContainer [innerHTML]="formattedResponse"></div>
+      <button class="copy-btn" (click)="copyResponse()">
+        {{ copied ? '✅ Copied!' : '📋 Copy Tips' }}
+      </button>
+      
+      <!-- Keep your matches section -->
+      <!-- <div *ngIf="results.matches" class="matches">
+        <h4>Inspired by these local insights:</h4>
+        <div *ngFor="let match of results.matches" class="match">
+          <p class="match-title">{{ match.title }}</p>
+          <p class="match-text">{{ match.selftext }}</p>
+        </div>
+      </div> -->
     </div>
+    <div class="palm-tree right">🌴</div>
   </div>
+
+  <div class="tropical-footer">
+    <p>Made with ❤️ for Jamaica lovers</p>
+    <p>Developed by Tahj Gordon.</p>
+    <div class="waves">🌊🌊🌊</div>
+  </div>
+</div>

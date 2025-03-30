@@ -1,0 +1,192 @@
+/* Tropical Theme */
+.tropical-container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #56CCF2, #2F80ED);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .tropical-header {
+    margin-bottom: 40px;
+  }
+  
+  .tropical-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .tropical-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+  
+  /* Search Section */
+  .tropical-search {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  
+  .tropical-search input {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 50px;
+    width: 60%;
+    max-width: 500px;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .tropical-search button {
+    background: #FF9E00;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .tropical-search button:hover {
+    background: #FF8000;
+    transform: translateY(-2px);
+  }
+  
+  /* Results Section */
+  .tropical-results {
+    position: relative;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
+  .palm-tree {
+    position: absolute;
+    font-size: 3rem;
+    top: -30px;
+  }
+  
+  .palm-tree.left {
+    left: -50px;
+  }
+  
+  .palm-tree.right {
+    right: -50px;
+  }
+  
+  .result-card {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  
+  .typewriter {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 20px 0;
+    border-left: 4px solid #FF9E00;
+    padding-left: 15px;
+    text-align: left;
+    min-height: 100px;
+  }
+  
+  .matches {
+    margin-top: 30px;
+    text-align: left;
+  }
+  
+  .match {
+    background: rgba(255, 158, 0, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .match-title {
+    font-weight: bold;
+    color: #2F80ED;
+    margin-bottom: 5px;
+  }
+  
+  /* Footer */
+  .tropical-footer {
+    margin-top: 60px;
+    padding-bottom: 20px;
+  }
+  
+  .waves {
+    font-size: 2rem;
+    margin-top: 10px;
+    letter-spacing: 10px;
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .tropical-results {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .llm-response {
+    text-align: left;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    white-space: pre-wrap; /* Preserves formatting */
+  }
+  
+  .llm-response h3 {
+    color: #2F80ED;
+    margin: 15px 0 10px;
+    font-size: 1.3rem;
+  }
+  
+  .llm-response ul {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+  
+  .llm-response li {
+    margin-bottom: 8px;
+  }
+  
+  .llm-response strong {
+    color: #FF9E00;
+  }
+  
+  .llm-response em {
+    color: #4CAF50;
+    font-style: italic;
+  }
+  
+  .copy-btn {
+    background: #2F80ED;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+  
+  .copy-btn:hover {
+    background: #1A5FB4;
+  }
+  
+  .copy-btn.copied {
+    background: #4CAF50;
+  }

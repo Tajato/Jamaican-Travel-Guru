@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RecommendationComponent } from './recommendation/recommendation.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
+  imports: [RecommendationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

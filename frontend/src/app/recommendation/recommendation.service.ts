@@ -9,6 +9,7 @@ export class RecService {
 
   constructor(private http: HttpClient) { }
 
+  // calls the fastAPI backend
   getRecommendations(query: string) {
     return this.http.post(`${this.apiUrl}/recommend`, { text: query });
   }
