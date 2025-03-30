@@ -19,9 +19,8 @@ app.add_middleware(
     allow_origins=["http://localhost:4200", # local link
                    "https://jarecsys-frontend.onrender.com"], # production link
     allow_credentials=True,
-    allow_methods=["POST"],  # Explicitly list allowed methods
+    allow_methods=["POST", "GET"],  # Allow GET, POST methods
     allow_headers=["Content-Type"],  # Required for JSON requests
-    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allows all headers
 )
 
