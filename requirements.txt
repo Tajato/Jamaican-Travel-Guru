@@ -10,3 +10,4 @@ numpy
 pydantic
 gunicorn
 starlette  # Needed for CORSMiddleware
+groq
