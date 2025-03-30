@@ -9,6 +9,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from groq import Groq
 from fastapi.middleware.cors import CORSMiddleware  
+from functools import lru_cache
 
 #Intialize FastAPI
 app = FastAPI()
@@ -23,21 +24,28 @@ app.add_middleware(
 )
 
 # Initialize model
-#model = SentenceTransformer('all-MiniLM-L6-v2')  # Embedding model that turns text into embeddings
-model = SentenceTransformer('paraphrase-albert-small-v2')  
-current_dir = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(current_dir, "cleaned_jamaica_tourism_data.csv")
-ja_df = pd.read_csv(csv_path)  
+model = SentenceTransformer('all-MiniLM-L6-v2')  # Embedding model that turns text into embeddings
+#model = SentenceTransformer('paraphrase-albert-small-v2')  
+@lru_cache(maxsize=1)
+def load_model():
+    """Cache the embedding model (loads only on first call)"""
+    return SentenceTransformer('paraphrase-albert-small-v2', device='cpu')
+@lru_cache(maxsize=1)
+def load_data():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(current_dir, "cleaned_jamaica_tourism_data.csv")
+    ja_df = pd.read_csv(csv_path)  
 
 # Generate embeddings
-ja_df['combined_text'] = ja_df['title'] + " " + ja_df['selftext'].fillna('')
-embeddings = model.encode(ja_df['combined_text'].tolist())
-embeddings = np.array(embeddings).astype('float32') #ensure data type of embeddings is float32
+    model = load_model()
+    ja_df['combined_text'] = ja_df['title'] + " " + ja_df['selftext'].fillna('')
+    embeddings = model.encode(ja_df['combined_text'].tolist())
+    embeddings = np.array(embeddings).astype('float32') #ensure data type of embeddings is float32
 
 # Build FAISS index
-index = faiss.IndexFlatL2(embeddings.shape[1])
-index.add(embeddings)
-
+    index = faiss.IndexFlatL2(embeddings.shape[1])
+    index.add(embeddings)
+    return ja_df, index
 class Query(BaseModel):
     text: str
 
@@ -45,6 +53,8 @@ load_dotenv()
 
 @app.post("/recommend")
 async def recommend(query: Query):
+    ja_df, index = load_data()
+    model = load_model()
     # 1. Get similar posts using FAISS
     query_embedding = model.encode([query.text])
     _, indices = index.search(query_embedding, k=3)  # Top 3 matches

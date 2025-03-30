@@ -9,3 +9,4 @@ pydantic
 gunicorn
 starlette  # Needed for CORSMiddleware
 groq
+lru_cache
