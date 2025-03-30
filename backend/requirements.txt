@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+sentence-transformers
+faiss-cpu
+requests
+python-dotenv
+pandas
+nltk
+string
+numpy
+pydantic
+CORSMiddleware
+groq
+gunicorn
