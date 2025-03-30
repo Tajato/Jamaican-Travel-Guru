@@ -15,8 +15,8 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200",
-                   "https://jarecsys-frontend.onrender.com"], 
+    allow_origins=["http://localhost:4200", # local link
+                   "https://jarecsys-frontend.onrender.com"], # production link
     allow_credentials=True,
     allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allows all headers
