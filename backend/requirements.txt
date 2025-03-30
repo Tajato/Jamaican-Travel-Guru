@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+sentence-transformers
+faiss-cpu
+requests
+python-dotenv
+pandas
+unicodedata
+nltk
+string
+numpy
+pydantic
+CORSMiddleware
+groq
+gunicorn
