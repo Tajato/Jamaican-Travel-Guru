@@ -5,8 +5,6 @@ faiss-cpu
 requests
 python-dotenv
 pandas
-nltk
-numpy
 pydantic
 gunicorn
 starlette  # Needed for CORSMiddleware
