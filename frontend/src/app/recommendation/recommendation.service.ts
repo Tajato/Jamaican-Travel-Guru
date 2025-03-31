@@ -8,7 +8,7 @@ import { delay, retry } from 'rxjs/operators';
 })
 export class RecService {
   private apiUrl = environment.apiUrl; // backend url link
-
+ //private apiUrl = 'http://localhost:8000';
   constructor(private http: HttpClient) { }
 
   // calls the fastAPI backend

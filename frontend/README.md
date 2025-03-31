@@ -1,59 +1,35 @@
-# Frontend
+# Jamaica Travel Recommendation System (AI-Powered RAG Pipeline)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+## 🌴 Overview
+This project is an AI-powered recommendation system that suggests travel destinations in Jamaica based on user queries. It implements a **Retrieval-Augmented Generation (RAG)** pipeline:
+1. **Retrieval**: Finds relevant Reddit posts using similarity search.
+2. **Augmentation**: Enhances responses with contextual data.
+3. **Generation**: Provides natural-language recommendations via LLM.
 
-## Development server
+## 🛠️ Technical Stack
+| Component | Technology |
+|-----------|------------|
+| **Frontend** | Angular |
+| **Backend** | FastAPI (Python) |
+| **Embeddings** | Sentence Transformers (`paraphrase-MiniLM-L3-v2`) |
+| **Vector Database** | FAISS (Facebook AI Similarity Search) |
+| **LLM** | Groq API (Llama-3-70b) |
 
-To start a local development server, run:
+## 🔍 Pipeline Architecture
 
-```bash
-ng serve
-```
+[User Query] --> (Embedding Model) --> [FAISS Similarity Search] --> [Top 3 Reddit Posts] --> [LLM Prompt Engineering] --> F[Final Recommendation]
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🔍 Key Steps
 
-## Code scaffolding
+### 1. Data Preparation
+- **Data Collection**: I scraped Reddit posts about travelling to Jamaica
+- **Embedding Generation**: Transformed text into embeddings using Sentence Transformers (`all-MiniLM-L6-v2`)
+- **Vector Storage**: Stored embeddings in a FAISS index for efficient similarity search
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 2. Query Processing
+- **User Input**: Converts natural language queries to embeddings
+- **Similarity Search**: FAISS retrieves the top 3 most relevant Reddit posts based on user's query.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 3. LLM Enhancement
+- **Prompt Engineering**: I combined the user's query and the retreived posts from the FAISS database and prompted the LLM with that context.
+- **Final Output**: The LLM provided the final, refined output.
