@@ -16,9 +16,8 @@ This project is an AI-powered recommendation system that suggests travel destina
 | **LLM** | Groq API (Llama-3-70b) |
 
 ## 🔍 Pipeline Architecture
-
-```mermaid
-graph LR
+ ```mermaid
+graph TD
     A[User Query] --> B(Embedding Model)
     B --> C[FAISS Similarity Search]
     C --> D[Top 3 Reddit Posts]
