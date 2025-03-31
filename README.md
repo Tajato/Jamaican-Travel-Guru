@@ -42,6 +42,6 @@ graph LR
   Therefore, the LLM implemented the final, refined output. 
 
   ### Here's a quick demo
-  ![Demo](demo.gif)
+  ![Demo](https://github.com/Tajato/Jamaican-Travel-Guru/blob/main/demo.gif?raw=true)
 
 
