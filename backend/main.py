@@ -21,31 +21,34 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["POST", "GET"],  # Allow GET, POST methods
     allow_headers=["Content-Type"],  # Required for JSON requests
-    allow_headers=["*"],  # Allows all headers
+    #allow_headers=["*"],  # Allows all headers
 )
 
 # Initialize model
-model = SentenceTransformer('all-MiniLM-L6-v2')  # Embedding model that turns text into embeddings
+#model = SentenceTransformer('all-MiniLM-L6-v2')  # Embedding model that turns text into embeddings
 #model = SentenceTransformer('paraphrase-albert-small-v2')  
 @lru_cache(maxsize=1)
 def load_model():
-    """Cache the embedding model (loads only on first call)"""
-    return SentenceTransformer('paraphrase-albert-small-v2', device='cpu')
+    """Cache the embedding model (loads only on first call) to reduce memory usage on Render"""
+    return SentenceTransformer('paraphrase-albert-small-v2', device='cpu') # using a smaller model like albert.
 @lru_cache(maxsize=1)
 def load_data():
+    # get absolute path because render could not find the csv file
     current_dir = os.path.dirname(os.path.abspath(__file__))
     csv_path = os.path.join(current_dir, "cleaned_jamaica_tourism_data.csv")
     ja_df = pd.read_csv(csv_path)  
 
-# Generate embeddings
+# Generate embeddings. Embeddings are vector represetation of texts.
     model = load_model()
-    ja_df['combined_text'] = ja_df['title'] + " " + ja_df['selftext'].fillna('')
-    embeddings = model.encode(ja_df['combined_text'].tolist())
+    ja_df['combined_text'] = ja_df['title'] + " " + ja_df['selftext'].fillna('') # combining title and selftext together
+    embeddings = model.encode(ja_df['combined_text'].tolist()) # this is where I turn combined title and selftext into vectors
     embeddings = np.array(embeddings).astype('float32') #ensure data type of embeddings is float32
 
 # Build FAISS index
-    index = faiss.IndexFlatL2(embeddings.shape[1])
-    index.add(embeddings)
+    index = faiss.IndexFlatL2(embeddings.shape[1]) # create an index for the embeddings I created. 
+    #We let FAISS know the dimensions of the vectors. Shape[1] signifes the dimenions of the vectors
+    #Using L2 distance(IndexFlatL2) instead of something like cosine similarity
+    index.add(embeddings) # add the embeddings to the FAISS index so we can perform similarity searches
     return ja_df, index
 class Query(BaseModel):
     text: str
@@ -56,12 +59,13 @@ load_dotenv()
 async def recommend(query: Query):
     ja_df, index = load_data()
     model = load_model()
-    # 1. Get similar posts using FAISS
-    query_embedding = model.encode([query.text])
-    _, indices = index.search(query_embedding, k=3)  # Top 3 matches
+    #Get similar posts using FAISS
+    query_embedding = model.encode([query.text]) # turning the query text into an embedding
+    _, indices = index.search(query_embedding, k=3)  # Performing a similarity search and getting top 3 matches
     matches = ja_df.iloc[indices[0]][['title', 'selftext']].to_dict('records')
 
-    # 2. Prepare LLM prompt
+    #Prepare LLM prompt so I can let the user get a natural language response. 
+    # Previously, the model just returned reddit title and comments. 
     context = "\n".join(
         f"Post {i+1}: {match['title']}\n{match['selftext']}\n" 
         for i, match in enumerate(matches)
@@ -85,7 +89,8 @@ async def recommend(query: Query):
     """
     
 
-    # 3. Call Groq API
+    # 3. Call Groq API to get access to the LLM.
+    # On local, I used llama locally but for production purposes, Groq API came in handy.
     try:
         response = requests.post(
             "https://api.groq.com/openai/v1/chat/completions",
