@@ -14,8 +14,9 @@ This project is an AI-powered recommendation system that suggests travel destina
 | **Embeddings** | Sentence Transformers (`paraphrase-MiniLM-L3-v2`) |
 | **Vector Database** | FAISS (Facebook AI Similarity Search) |
 | **LLM** | Groq API (Llama-3-70b) |
-
+```md
 ## 🔍 Pipeline Architecture
+
 ```mermaid
 graph LR
     A[User Query] --> B(Embedding Model)
@@ -34,9 +35,7 @@ graph LR
 ### 2. Query Processing
 - **User Input**: Converts natural language queries to embeddings
 - **Similarity Search**: FAISS retrieves the top 3 most relevant Reddit posts based on:
-  ```python
-  _, indices = index.search(query_embedding, k=3)
-
+ 
   ### 3. LLM Prompt Engineering
   - **Prompting**: I sent the retreived posts and the user's query as context when prompting the LLM. 
   Therefore, the LLM implemented the final, refined output. 
