@@ -20,8 +20,8 @@ app.add_middleware(
                    "https://jarecsys-frontend.onrender.com"], # production link
     allow_credentials=True,
     allow_methods=["POST", "GET"],  # Allow GET, POST methods
-    allow_headers=["Content-Type"],  # Required for JSON requests
-    #allow_headers=["*"],  # Allows all headers
+    allow_headers=["Content-Type", "Authorization"],  # Required for JSON requests
+    expose_headers=["*"],  # Allows all headers
 )
 
 # Initialize model
