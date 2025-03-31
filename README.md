@@ -14,7 +14,7 @@ This project is an AI-powered recommendation system that suggests travel destina
 | **Embeddings** | Sentence Transformers (`paraphrase-MiniLM-L3-v2`) |
 | **Vector Database** | FAISS (Facebook AI Similarity Search) |
 | **LLM** | Groq API (Llama-3-70b) |
-```md
+
 ## 🔍 Pipeline Architecture
 
 ```mermaid
@@ -40,7 +40,8 @@ graph LR
   - **Prompting**: I sent the retreived posts and the user's query as context when prompting the LLM. 
   Therefore, the LLM implemented the final, refined output. 
 
-  ### Here's a quick demo
-  ![Demo](https://github.com/Tajato/Jamaican-Travel-Guru/blob/main/demo.gif?raw=true)
+
+### Here's a quick demo
+![Demo](https://github.com/Tajato/Jamaican-Travel-Guru/blob/main/demo.gif?raw=true)
 
 
