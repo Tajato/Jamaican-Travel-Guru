@@ -17,12 +17,12 @@ This project is an AI-powered recommendation system that suggests travel destina
 
 ## 🔍 Pipeline Architecture
 ```mermaid
-graph TD
-A[User Query] --> B(Embedding Model)
-B --> C[FAISS Similarity Search]
-C --> D[Top 3 Reddit Posts]
-D --> E[LLM Prompt Engineering]
-E --> F[Final Recommendation]
+graph LR
+    A[User Query] --> B(Embedding Model)
+    B --> C[FAISS Similarity Search]
+    C --> D[Top 3 Reddit Posts]
+    D --> E[LLM Prompt Engineering]
+    E --> F[Final Recommendation]
 
 ## Key Steps & Processes
 
@@ -42,5 +42,6 @@ E --> F[Final Recommendation]
   Therefore, the LLM implemented the final, refined output. 
 
   ### Here's a quick demo
+  ![Demo](demo.gif)
 
 
