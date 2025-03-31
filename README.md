@@ -24,7 +24,7 @@ C --> D[Top 3 Reddit Posts]
 D --> E[LLM Prompt Engineering]
 E --> F[Final Recommendation]
 
-## 🔍 Key Steps & Processes
+## Key Steps & Processes
 
 ### 1. Data Preparation
 - **Data Collection**: I scraped Reddit posts through Reddit's API from subreddits.
@@ -42,5 +42,5 @@ E --> F[Final Recommendation]
   Therefore, the LLM implemented the final, refined output. 
 
   ### Here's a quick demo
-  ![Demo](demo.gif)
+
 
