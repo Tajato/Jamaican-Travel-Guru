@@ -22,7 +22,8 @@ graph TD
     B --> C[FAISS Similarity Search]
     C --> D[Top 3 Reddit Posts]
     D --> E[LLM Prompt Engineering]
-    E --> F[Final Recommendation]
+    E --> F[Final Recommendation];
+```
 
 ## Key Steps & Processes
 
