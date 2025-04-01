@@ -2,5 +2,5 @@
 
 export const environment = {
     production: true,
-    apiUrl: 'https://jarecsys-backend.onrender.com' // Render link for backend.
+    apiUrl: 'http://travel-guru-frontend-bucket.s3-website-us-east-1.amazonaws.com' // AWS link for backend.
   };
